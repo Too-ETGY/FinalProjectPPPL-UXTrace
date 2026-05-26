@@ -1,11 +1,11 @@
 # Tugas Besar Praktikum Pengujian Perangkat Lunak
 
 Repositori ini digunakan untuk memenuhi Tugas Besar Praktikum Pengujian Perangkat Lunak. Kami melakukan pengujian *end-to-end* (E2E) pada platform **UXTrace**, sebuah sistem *dashboard analytics* dan *alert system tracking* yang digunakan untuk memantau website **KUR Jogja**.
-> 📢 **Catatan:** Repositori ini akan terus diperbarui secara berkala seiring berjalannya progres proyek**.
+>  **Catatan:** Repositori ini akan terus diperbarui secara berkala seiring berjalannya progres proyek**.
 
 ---
 
-## 👥 Anggota Kelompok & Pembagian Tugas
+##  Anggota Kelompok & Pembagian Tugas
 
 **Kelompok: Sesuai Kelompok PAD 2**
 
@@ -18,7 +18,7 @@ Repositori ini digunakan untuk memenuhi Tugas Besar Praktikum Pengujian Perangka
 
 ---
 
-## 🎯 Target Pengujian (Scope)
+##  Target Pengujian (Scope)
 
 * **Aplikasi Target:** UXTrace (Dashboard Analytics & Alert System - KUR Jogja)
 * **Jenis Pengujian:** *End-to-End* (E2E) / *Minimum Viable Product* (MVP) User Flow
@@ -31,7 +31,7 @@ Repositori ini digunakan untuk memenuhi Tugas Besar Praktikum Pengujian Perangka
 
 ---
 
-## 🛠️ Tech Stack & Arsitektur
+##  Tech Stack & Arsitektur
 
 Proyek pengujian ini dibangun menggunakan teknologi berikut:
 
@@ -43,7 +43,7 @@ Proyek pengujian ini dibangun menggunakan teknologi berikut:
 
 ---
 
-## 📑 Komponen Proyek Akhir
+##  Komponen Proyek Akhir
 
 ### 1. Test Suite & Desain Test Case
 Penyusunan *test case* dilakukan dengan memanfaatkan metode pengujian formal seperti **Boundary Value Analysis (BVA)** dan **Equivalence Partitioning (EP)** untuk memastikan efektivitas *input validation*.
@@ -62,7 +62,7 @@ Proyek ini telah dikonfigurasi untuk menghasilkan laporan pengujian secara otoma
 
 ---
 
-## 🚀 Cara Menjalankan Pengujian
+##  Cara Menjalankan Pengujian
 
 ### Prasyarat (Prerequisites)
 * Java Development Kit (JDK) versi 11 atau yang terbaru.
