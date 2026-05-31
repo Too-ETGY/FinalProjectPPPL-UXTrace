@@ -12,7 +12,7 @@ Repositori ini digunakan untuk memenuhi Tugas Besar Praktikum Pengujian Perangka
 | Nama Anggota | Fitur / Alur yang Diuji | Tanggung Jawab Kode Pengujian |
 | :--- | :--- | :--- |
 | **Farid Ahmad Nur Rahman** | Fitur Autentikasi | Login/Logout, Validasi Akses Pengguna |
-| **Rua Adelia** | Pencarian Event Log | Validasi Hasil Pencarian | Tampilan Detail Event Console
+| **Rua Adelia** | Fitur Console |  Pencarian Event Log, Validasi Hasil Pencarian, Tampilan Detail Event Console
 | **Tegar Raditya Hikmawan** | Fitur Query Log | Pencarian Log, Riwayat Query, Validasi Data Log |
 | **Dzakiya Hakima Adila** | Fitur Alert | Konfigurasi Alert, Notifikasi Trigger System |
 
