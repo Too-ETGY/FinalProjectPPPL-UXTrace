@@ -1,0 +1,42 @@
+@Alarm
+Feature: Alarm Management Functional Testing
+  Sebagai Admin UXTrace
+  Aku ingin mengelola konfigurasi alarm dan menguji fungsi pemicu alert
+  Agar aku dapat memastikan sistem peringatan UI berfungsi dengan normal
+
+  Background: User sudah berada di halaman Alarm Management
+    Given User sudah login ke platform UXTrace menggunakan akun valid
+    And User menavigasi ke halaman Alarm Management
+
+  Scenario: Berhasil membuat alarm baru dengan melakukan simulasi uji alert terlebih dahulu
+    When User mengklik tombol "Tambah Alarm" untuk membuka form modal
+    And User mengisi form alarm dengan data valid
+    And User mengklik tombol "Kirim Uji Alert" pada form modal
+    Then Jendela pop-up simulasi uji alert harus menampilkan status "Berhasil"
+    When User mengklik tombol "Selesai" untuk menutup jendela pop-up uji alert
+    And User mengklik tombol "Simpan" untuk mengonfirmasi pembuatan
+    Then Sistem harus menutup modal utama dan menampilkan alarm baru di tabel
+
+  Scenario: Berhasil mengubah data konfigurasi alarm aktif melalui verifikasi uji alert
+    When User mengklik tombol "Edit" pada data alarm yang sudah ada
+    And User mengubah data alarm dengan data baru
+    And User mengklik tombol "Kirim Uji Alert" pada form edit modal
+    Then Jendela pop-up simulasi uji alert harus menampilkan status "Berhasil"
+    When User mengklik tombol "Selesai" untuk menutup jendela pop-up uji alert
+    And User mengklik tombol "Simpan" untuk mengonfirmasi pembaruan
+    Then Sistem harus berhasil memperbarui konfigurasi data alarm tersebut
+
+  Scenario: Memfilter data alarm secara dinamis menggunakan kolom pencarian
+    When User mengetik kata kunci pencarian pada search bar alarm
+    Then Tabel daftar alarm hanya menampilkan baris data sesuai kata kunci
+
+  Scenario: Menghapus satu data alarm secara langsung dari tabel utama
+    When User mengklik tombol "Hapus" pada baris tunggal data alarm
+    And User mengonfirmasi tindakan penghapusan pada dialog konfirmasi
+    Then Baris data alarm tersebut harus menghilang dari tabel utama
+
+  Scenario: Menghapus beberapa data alarm sekaligus secara massal
+    When User mencentang kotak checkbox pada beberapa baris data alarm di tabel
+    And User mengklik tombol "Hapus Terpilih" di bagian atas tabel
+    And User mengonfirmasi tindakan penghapusan massal
+    Then Semua baris data alarm yang dicentang harus berhasil dihapus dari tabel
