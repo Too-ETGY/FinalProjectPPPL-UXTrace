@@ -1,4 +1,5 @@
 package pages;
 
-public class AlarmPage {
+public class AlarmPage extends BasePage {
+
 }
