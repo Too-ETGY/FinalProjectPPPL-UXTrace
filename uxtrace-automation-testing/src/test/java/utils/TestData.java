@@ -23,10 +23,4 @@ public class TestData {
     public static final String REGISTER_EMAIL = "testuser_" + System.currentTimeMillis() + "@gmail.com";
     public static final String REGISTER_PASSWORD = "12345678";
     public static final String REGISTER_CONFIRM_PASSWORD = "12345678";
-
-    // Console Data
-    public static final String CONSOLE_SEARCH_KEYWORD = "kur_page_enter";
-    public static final String CONSOLE_SEARCH_KEYWORD_2 = "kur_page_slide";
-    public static final String CONSOLE_START_TIME = "06/11/2026 05:00 PM";
-    public static final String CONSOLE_END_TIME = "06/18/2026 05:00 PM";
 }
