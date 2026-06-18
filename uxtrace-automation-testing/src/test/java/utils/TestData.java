@@ -15,4 +15,10 @@ public class TestData {
     public static final String ALARM_EDIT_INTERVAL = "10";
     public static final String ALARM_EDIT_QUERY = "SELECT * FROM events WHERE event_name = 'enter_page' AND btm = 'a345.b432.c120.d0'";
     public static final String ALARM_EDIT_MESSAGE = "Pesan Notifikasi Hasil Update";
+
+    // Console Data
+    public static final String CONSOLE_SEARCH_KEYWORD = "kur_page_enter";
+    public static final String CONSOLE_SEARCH_KEYWORD_2 = "kur_page_slide";
+    public static final String CONSOLE_START_TIME = "2026-06-11T17:00";
+    public static final String CONSOLE_END_TIME = "2026-06-18T17:00";
 }
