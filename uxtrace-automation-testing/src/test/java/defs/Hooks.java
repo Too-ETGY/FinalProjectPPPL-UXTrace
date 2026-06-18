@@ -10,7 +10,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import utils.*;
 /**
  * Driver lifecycle + auth cookie seeding.
- *
  * IMPORTANT: this intentionally does NOT perform a real login. It only
  * injects the token/user_email/user_name cookies directly into the browser
  * session before each scenario, which is the standard way to skip a slow

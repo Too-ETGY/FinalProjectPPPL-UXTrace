@@ -7,7 +7,7 @@ package utils;
  */
 public class TestConfig {
 
-    public static final String BASE_URL = "https://uxtrace.vercel.app";
+    public static final String BASE_URL = "http://localhost:5173";
     public static final String QUERY_LOG_PATH = "/query";
     public static final String QUERY_LOG_URL = BASE_URL + QUERY_LOG_PATH;
 
