@@ -15,19 +15,7 @@ import java.util.List;
 
 public class Hooks {
 
-    // ===================================================
-    // FIELD
-    // ===================================================
-
     public static WebDriver driver;
-    // "public static" → bisa diakses langsung dari class lain
-    // tanpa perlu bikin instance Hooks dulu
-    // contoh: Hooks.driver.get(...) dari AlarmSteps
-
-    // ===================================================
-    // BEFORE — SETUP SEBELUM TIAP SCENARIO
-    // ===================================================
-
     @Before(order = 1)
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
@@ -45,11 +33,9 @@ public class Hooks {
             System.out.println("Membuka halaman login...");
             System.out.println("Current URL: " + driver.getCurrentUrl());
 
-            // ✅ FIX: Tunggu halaman benar-benar load dulu
             wait.until(ExpectedConditions.urlContains("/login"));
-            Thread.sleep(2000); // beri waktu React/Vue render form
+            Thread.sleep(2000);
 
-            // ✅ FIX: Print semua input yang ada di halaman untuk debug
             List<WebElement> allInputs = driver.findElements(By.tagName("input"));
             System.out.println("Jumlah input ditemukan: " + allInputs.size());
             for (WebElement input : allInputs) {
@@ -59,16 +45,13 @@ public class Hooks {
                         + ", id: " + input.getAttribute("id"));
             }
 
-            // ✅ FIX: Selector lebih luas, tangkap semua kemungkinan field email
             WebElement emailField = wait.until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath("//input[@type='email' or @type='text'][1]")
-                    // Ambil input pertama yang ketemu, baik type email maupun text
             ));
             emailField.clear();
             emailField.sendKeys("gweh@mail.com");
             System.out.println("Mengisi email berhasil");
 
-            // ✅ FIX: Selector password lebih robust
             WebElement passwordField = wait.until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath("//input[@type='password']")
             ));
@@ -76,7 +59,6 @@ public class Hooks {
             passwordField.sendKeys("asdfghjkl");
             System.out.println("Mengisi password berhasil");
 
-            // ✅ FIX: Tunggu tombol login clickable
             WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(
                     By.xpath("//button[@type='submit'] | //button[contains(text(), 'Login')] | //button[contains(text(), 'Masuk')] | //button[contains(text(), 'Sign In')]")
             ));
@@ -84,7 +66,6 @@ public class Hooks {
             loginButton.click();
             System.out.println("Klik tombol login");
 
-            // ✅ FIX: Tunggu URL berubah dari /login (lebih fleksibel)
             wait.until(ExpectedConditions.not(
                     ExpectedConditions.urlContains("/login")
             ));

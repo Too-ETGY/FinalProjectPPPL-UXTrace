@@ -18,9 +18,6 @@ public class AlarmSteps {
         alarmPage = new AlarmPage(Hooks.driver);
     }
 
-    // ===================================================
-    // GIVEN — PRECONDITION
-    // ===================================================
 
     @Given("User sudah login ke platform UXTrace menggunakan akun valid")
     public void userSudahLoginKePlatformUXTrace() {
@@ -35,10 +32,6 @@ public class AlarmSteps {
         Hooks.driver.get(TestData.BASE_URL + "/alarm"); // ✅ FIX: pakai BASE_URL
         System.out.println("Navigasi ke halaman Alarm Management");
     }
-
-    // ===================================================
-    // WHEN — AKSI USER — FORM MODAL
-    // ===================================================
 
     @When("User mengklik tombol {string} untuk membuka form modal")
     public void userMengklikTombolCreateAlarm(String btnName) {
@@ -65,7 +58,7 @@ public class AlarmSteps {
                 TestData.ALARM_EDIT_QUERY,
                 TestData.ALARM_EDIT_MESSAGE,
                 TestData.ALARM_EDIT_INTERVAL,
-                TestData.ALARM_EDIT_TELEGRAM // ✅ FIX: pakai ALARM_EDIT_TELEGRAM
+                TestData.ALARM_EDIT_TELEGRAM
         );
         System.out.println("Mengubah data alarm dengan data baru");
     }
@@ -94,19 +87,12 @@ public class AlarmSteps {
         System.out.println("Klik tombol: " + btnName);
     }
 
-    // ===================================================
-    // WHEN — AKSI USER — UJI ALERT
-    // ===================================================
-
     @When("User mengklik tombol {string} untuk menutup jendela pop-up uji alert")
     public void userMengklikTombolCloseUjiAlert(String btnName) {
         alarmPage.clickCloseUjiAlert();
         System.out.println("Klik tombol: " + btnName);
     }
 
-    // ===================================================
-    // WHEN — AKSI USER — TABEL
-    // ===================================================
 
     @When("User mengklik tombol {string} pada data alarm yang sudah ada")
     public void userMengklikTombolEditPadaDataAlarm(String btnName) {
@@ -126,10 +112,6 @@ public class AlarmSteps {
         System.out.println("Klik tombol " + btnName + " pada alarm: " + TestData.ALARM_TITLE);
     }
 
-    // ===================================================
-    // WHEN — AKSI USER — BULK DELETE
-    // ===================================================
-
     @When("User mencentang kotak checkbox pada beberapa baris data alarm di tabel")
     public void userMencentangKotakCheckboxBulk() {
         alarmPage.checkMultipleAlarmsInTable();
@@ -142,9 +124,6 @@ public class AlarmSteps {
         System.out.println("Klik tombol: " + btnName);
     }
 
-    // ===================================================
-    // AND — KONFIRMASI DELETE
-    // ===================================================
 
     @And("User mengonfirmasi tindakan penghapusan pada dialog konfirmasi")
     public void userMengonfirmasiTindakanPenghapusan() {
@@ -157,10 +136,6 @@ public class AlarmSteps {
         alarmPage.confirmDelete();
         System.out.println("Konfirmasi penghapusan massal");
     }
-
-    // ===================================================
-    // THEN — ASSERTION / VERIFIKASI
-    // ===================================================
 
     @Then("Jendela pop-up simulasi uji alert harus menampilkan status {string}")
     public void jendelaPopUpSimulasiUjiAlertHarusMenampilkanStatus(String expectedStatus) {
@@ -202,19 +177,9 @@ public class AlarmSteps {
         System.out.println("Pencarian berhasil, alarm ditemukan");
     }
 
-//    @Then("Baris data alarm tersebut harus menghilang dari tabel utama")
-//    public void barisDataAlarmTersebutHarusMenghilangDariTabelUtama() {
-//        boolean isVisible = alarmPage.isAlarmTextVisibleInTable(TestData.ALARM_TITLE);
-//        Assert.assertFalse(
-//                "Alarm '" + TestData.ALARM_TITLE + "' masih ada di tabel!",
-//                isVisible
-//        );
-//        System.out.println("Alarm '" + TestData.ALARM_TITLE + "' berhasil dihapus");
-//    }
 
     @Then("Baris data alarm tersebut harus menghilang dari tabel utama")
     public void barisDataAlarmTersebutHarusMenghilangDariTabelUtama() {
-        // ✅ FIX: pakai waitUntilAlarmDisappears bukan isAlarmTextVisibleInTable
         boolean isStillVisible = alarmPage.waitUntilAlarmDisappears(TestData.ALARM_TITLE);
         Assert.assertFalse(
                 "Alarm '" + TestData.ALARM_TITLE + "' masih ada di tabel!",
@@ -225,7 +190,6 @@ public class AlarmSteps {
 
     @Then("Semua baris data alarm yang dicentang harus berhasil dihapus dari tabel")
     public void semuaBarisDataAlarmYangDicentangBerhasilDihapus() {
-        // ✅ FIX: pakai waitUntilAlarmDisappears
         boolean isStillVisible = alarmPage.waitUntilAlarmDisappears(TestData.ALARM_TITLE);
         Assert.assertFalse(
                 "Alarm yang dihapus masih ditemukan di tabel!",

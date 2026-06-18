@@ -11,6 +11,7 @@ public class TestData {
     public static final String ALARM_TELEGRAM = "1484397336";
     public static final String ALARM_SEARCH_KEYWORD = "Alert Click";
 
+    //EDIT DATA
     public static final String ALARM_EDIT_TITLE = "Alert Click Updated";
 
     public static final String ALARM_EDIT_QUERY = "SELECT * FROM events WHERE event_name = 'kur_button_click' WHEN count > 100";
