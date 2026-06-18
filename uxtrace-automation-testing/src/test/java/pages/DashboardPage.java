@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+// import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import utils.DashboardLocators;
 import utils.TestConfig;
@@ -97,14 +97,21 @@ public class DashboardPage extends BasePage {
 
     public void clickCheckPreview() {
         click(DashboardLocators.ADD_MODAL__PREVIEW_BUTTON);
-        // Canvas inside a native <dialog> is unreliable with visibilityOfElementLocated.
-        // Wait for it to be present in the DOM instead, or for an error div.
-        wait.until(d ->
-                !d.findElements(DashboardLocators.ADD_MODAL__PREVIEW_CHART).isEmpty()
-                        || !d.findElements(By.cssSelector("dialog[aria-label='Panel metric modal'][open] div.bg-error-bg")).isEmpty()
-        );
-    }
 
+        // Wait for the "Cek Preview" button to become enabled again.
+        // previewLoading=true disables it; when it flips back to false the API call
+        // is done — whether result is empty, has data, or returned an error.
+        wait.until(d -> {
+            List<WebElement> btns = d.findElements(DashboardLocators.ADD_MODAL__PREVIEW_BUTTON);
+            if (btns.isEmpty()) return false;
+            WebElement btn = btns.get(0);
+            // Button is disabled while loading (disabled attr or disabled property)
+            Object disabled = ((JavascriptExecutor) d)
+                    .executeScript("return arguments[0].disabled;", btn);
+            return !Boolean.TRUE.equals(disabled);
+        });
+    }
+    
     public void clickSavePanel() {
         click(DashboardLocators.ADD_MODAL__SAVE_BUTTON);
         waitForAddModalClosed();
