@@ -6,15 +6,18 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/02_alarm.feature", //tambah fiturnya masing2 di sini
+        features = "src/test/resources/features/04_querylog.feature",
         glue = "defs",
         plugin = {
                 "pretty",
-                "html:target/cucumber-reports/alarm-test-report.html",
-                "json:target/cucumber-reports/cucumber.json"
+                "html:target/cucumber-reports/query-log-test-report.html",
+                "json:target/cucumber-reports/query-log.json"
         },
-        tags = "@Alarm", //tambah tag masing2 di sini
+        tags = "@QueryLog",
         monochrome = true
 )
 public class TestRunner {
+        public TestRunner() {
+                System.out.println("=== CUCUMBER RUNNER INITIALIZED ===");
+        }
 }
