@@ -6,14 +6,14 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/02_alarm.feature", //tambah fiturnya masing2 di sini
+        features = "src/test/resources/features/01_auth.feature", //tambah fiturnya masing2 di sini
         glue = "defs",
         plugin = {
                 "pretty",
-                "html:target/cucumber-reports/alarm-test-report.html",
+                "html:target/cucumber-reports/auth-test-report.html",
                 "json:target/cucumber-reports/cucumber.json"
         },
-        tags = "@Alarm", //tambah tag masing2 di sini
+        tags = "@Auth", //tambah tag masing2 di sini
         monochrome = true
 )
 public class TestRunner {
