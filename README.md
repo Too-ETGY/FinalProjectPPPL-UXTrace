@@ -1,78 +1,136 @@
-# Tugas Besar Praktikum Pengujian Perangkat Lunak
+#  UXTrace Automation Testing — Modul Alarm
 
-Repositori ini digunakan untuk memenuhi Tugas Besar Praktikum Pengujian Perangkat Lunak. Kami melakukan pengujian *end-to-end* (E2E) pada platform **UXTrace**, sebuah sistem *dashboard analytics* dan *alert system tracking* yang digunakan untuk memantau website **KUR Jogja**.
->  **Catatan:** Repositori ini akan terus diperbarui secara berkala seiring berjalannya progres proyek**.
+Branch automation testing untuk modul **Alarm / Alert** pada sistem **UXTrace** — platform monitoring dan alerting sistem website KUR Jogja.
 
----
+>  Dzakiya Hakima Adila  
+>  Branch: `feature/alert-testing`  
 
-##  Anggota Kelompok & Pembagian Tugas
 
-**Kelompok: Sesuai Kelompok PAD 2**
+## 📁 Struktur File Modul Alarm
 
-| Nama Anggota | Fitur / Alur yang Diuji | Tanggung Jawab Kode Pengujian |
-| :--- | :--- | :--- |
-| **Farid Ahmad Nur Rahman** | Fitur Autentikasi | Login/Logout, Validasi Akses Pengguna |
-| **Rua Adelia** | Fitur Console |  Pencarian Event Log, Validasi Hasil Pencarian, Tampilan Detail Event Console
-| **Tegar Raditya Hikmawan** | Fitur Query Log | Pencarian Log, Riwayat Query, Validasi Data Log |
-| **Dzakiya Hakima Adila** | Fitur Alert | Konfigurasi Alert, Notifikasi Trigger System |
-
----
-
-##  Target Pengujian (Scope)
-
-* **Aplikasi Target:** UXTrace (Dashboard Analytics & Alert System - KUR Jogja)
-* **Jenis Pengujian:** *End-to-End* (E2E) / *Minimum Viable Product* (MVP) User Flow
-* **Cakupan Halaman (Minimal 5 Halaman):**
-    1. Halaman Login / Autentikasi
-    2. Halaman Dashboard Utama (Panel Analytics)
-    3. Halaman Query Log Browser
-    4. Halaman Pengaturan / Detail Alert
-    5. Halaman Log Out / Konfirmasi Sesi
-
----
-
-##  Tech Stack & Arsitektur
-
-Proyek pengujian ini dibangun menggunakan teknologi berikut:
-
-* **Bahasa Pemrograman:** Java
-* **Build Tool:** Apache Maven
-* **Framework Pengujian:** Selenium WebDriver
-* **Pendekatan BDD:** Cucumber (dengan Gherkin Syntax)
-* **Design Pattern:** Page Object Model (POM) untuk efisiensi dan reusabilitas kode.
+```
+uxtrace-automation-testing/
+├── src/
+│   └── test/
+│       ├── java/
+│       │   ├── defs/
+│       │   │   ├── AlarmSteps.java     # Step definitions semua scenario alarm
+│       │   │   └── Hooks.java          # Setup browser & login, teardown
+│       │   ├── pages/
+│       │   │   ├── BasePage.java       # Fondasi: driver & wait diwarisi semua page
+│       │   │   └── AlarmPage.java      # Semua interaksi UI halaman alarm
+│       │   ├── runner/
+│       │   │   └── TestRunner.java     # Entry point eksekusi test
+│       │   └── utils/
+│       │       └── TestData.java       # Centralized test data & BASE_URL
+│       └── resources/
+│           └── features/
+│               └── 02_alarm.feature    # Skenario BDD modul alarm
+└── pom.xml
+```
 
 ---
 
-##  Komponen Proyek Akhir
+##  Skenario Pengujian
 
-### 1. Test Suite & Desain Test Case
-Penyusunan *test case* dilakukan dengan memanfaatkan metode pengujian formal seperti **Boundary Value Analysis (BVA)** dan **Equivalence Partitioning (EP)** untuk memastikan efektivitas *input validation*.
-> *[link spreadsheet will be added later]*
+File: `src/test/resources/features/02_alarm.feature`
 
-### 2. Kode Pengujian (BDD & POM)
-* Menggunakan syntax **Gherkin** (`.feature` files) untuk mendefinisikan skenario dalam bahasa alami.
-* Pemisahan logika elemen web menggunakan **Page Object Model (POM)** untuk mempermudah *maintenance* kode jika terjadi perubahan elemen UI pada website UXTrace.
+| Tag | Skenario | Status |
+|-----|----------|--------|
+| `@Alarm_Create` | Membuat alarm baru dengan simulasi uji alert terlebih dahulu | ✅ PASSED |
+| `@Alarm_Edit` | Mengubah data konfigurasi alarm melalui verifikasi uji alert | ✅ PASSED |
+| `@Alarm_Search` | Memfilter data alarm menggunakan kolom pencarian | ✅ PASSED |
+| `@Alarm_Delete_Single` | Menghapus satu data alarm dari tabel utama | ✅ PASSED |
+| `@Alarm_Delete_Bulk` | Menghapus beberapa data alarm sekaligus secara massal | ✅ PASSED |
 
-### 3. Bug Reporting
-Setiap *bug* atau *defect* yang ditemukan selama proses pengujian dicatat secara terstruktur pada dokumentasi laporan bug kelompok kami.
-> *[Link docs or github issues will be added later]*
+### Detail Skenario
 
-### 4. Automated Report Generation (Bonus Feature)
-Proyek ini telah dikonfigurasi untuk menghasilkan laporan pengujian secara otomatis (*automated generation of report*) setiap kali pengujian selesai dijalankan, menggunakan plugin *Cucumber HTML Reporter / Cluecumber*.
+**Scenario 1 — Create Alarm** `@Alarm_Create`
+```
+1. Klik tombol "Tambah Alarm" → modal form terbuka
+2. Isi form alarm (nama, query, pesan, interval, telegram)
+3. Klik "Kirim Uji Alert" → tunggu response server
+4. Verifikasi pop-up menampilkan status "Berhasil"
+5. Tutup pop-up → klik "Simpan"
+6. Verifikasi alarm baru muncul di tabel
+```
+
+**Scenario 2 — Edit Alarm** `@Alarm_Edit`
+```
+1. Klik tombol "Edit" pada baris alarm "Alert Click"
+2. Ubah semua field dengan data baru
+3. Klik "Kirim Uji Alert" → tunggu response server
+4. Verifikasi pop-up menampilkan status "Berhasil"
+5. Tutup pop-up → klik "Simpan"
+6. Verifikasi alarm terupdate menjadi "Alert Click Updated" di tabel
+```
+
+**Scenario 3 — Search Alarm** `@Alarm_Search`
+```
+1. Ketik kata kunci pada search bar
+2. Tekan Enter
+3. Verifikasi tabel hanya menampilkan hasil sesuai keyword
+```
+
+**Scenario 4 — Delete Single** `@Alarm_Delete_Single`
+```
+1. Klik tombol "Hapus" pada baris alarm target
+2. Konfirmasi pada dialog yang muncul
+3. Verifikasi alarm sudah tidak ada di tabel
+```
+
+**Scenario 5 — Bulk Delete** `@Alarm_Delete_Bulk`
+```
+1. Centang checkbox pada 2 baris alarm
+2. Klik tombol "Hapus" di bagian atas tabel
+3. Konfirmasi pada dialog yang muncul
+4. Verifikasi semua alarm yang dicentang sudah terhapus
+```
+
+
+### TestData.java — Data yang Digunakan
+| Konstanta | Nilai | Keterangan |
+|-----------|-------|------------|
+| `BASE_URL` | `http://localhost:5173` | URL aplikasi lokal |
+| `ALARM_TITLE` | `Alert Click` | Nama alarm saat create |
+| `ALARM_QUERY` | `SELECT * FROM events WHERE...` | Query trigger alarm |
+| `ALARM_MESSAGE` | `Pesan pemicu click button terdeteksi` | Pesan notifikasi |
+| `ALARM_INTERVAL` | `5` | Interval pengecekan (menit) |
+| `ALARM_TELEGRAM` | `1484397336` | ID Telegram tujuan |
+| `ALARM_SEARCH_KEYWORD` | `Alert Click` | Keyword pencarian |
+| `ALARM_EDIT_TITLE` | `Alert Click Updated` | Nama alarm setelah edit |
+| `ALARM_EDIT_INTERVAL` | `10` | Interval baru setelah edit |
 
 ---
 
-##  Cara Menjalankan Pengujian
+##  Arsitektur Kode
 
-### Prasyarat (Prerequisites)
-* Java Development Kit (JDK) versi 11 atau yang terbaru.
-* Apache Maven terinstall.
-* Google Chrome / WebDriver yang sesuai.
-
-### Langkah-Langkah
-
-1. **Clone Repositori:**
-   ```bash
-   git clone [https://github.com/username/repository-name.git](https://github.com/username/repository-name.git)
-   cd repository-name
-2. **
+```
+02_alarm.feature
+│   Skenario ditulis dalam bahasa Gherkin
+│   Bisa dipahami tanpa perlu tahu kode Java
+│
+└── AlarmSteps.java
+│   Jembatan antara Gherkin dan Java
+│   Berisi @Given @When @And @Then
+│   Delegasi semua aksi ke AlarmPage
+│
+└── AlarmPage.java
+│   Representasi halaman Alarm di UI
+│   Menyimpan semua selector elemen (By.id, By.xpath, By.cssSelector)
+│   Berisi semua method interaksi: klik, isi form, cek tabel, dll
+│
+└── BasePage.java
+│   Fondasi semua page object
+│   Menyediakan WebDriver dan WebDriverWait (15 detik)
+│   Di-extend oleh AlarmPage
+│
+└── Hooks.java
+│   @Before(order=1): buka Chrome, login otomatis
+│   @Before(order=2): inisialisasi AlarmPage (di AlarmSteps)
+│   @After: tutup browser setelah tiap scenario
+│
+└── TestData.java
+    Semua data test terpusat di sini
+    Jika data berubah, cukup update file ini
+```
