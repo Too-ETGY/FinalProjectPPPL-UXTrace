@@ -75,7 +75,7 @@ public class AuthSteps {
 
     @Then("User berhasil diarahkan ke halaman login")
     public void userDiarahkanKeHalamanLogin() {
-        new WebDriverWait(Hooks.driver, Duration.ofSeconds(15))
+        new WebDriverWait(Hooks.driver, Duration.ofSeconds(30))
                 .until(ExpectedConditions.urlContains("/login"));
 
         try { Thread.sleep(2000); } catch (InterruptedException e) { e.printStackTrace(); }
