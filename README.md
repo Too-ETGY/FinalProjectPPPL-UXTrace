@@ -213,11 +213,6 @@ Buka file `.html` di browser untuk melihat hasil test secara visual.
 | Tag | Keterangan |
 |-----|------------|
 | `@Alarm` | Semua scenario modul Alarm |
-| `@Alarm_Create` | Scenario create alarm |
-| `@Alarm_Edit` | Scenario edit alarm |
-| `@Alarm_Delete_Single` | Scenario hapus satu alarm |
-| `@Alarm_Delete_Bulk` | Scenario hapus banyak alarm |
-| `@Alarm_Search` | Scenario search alarm |
 | `@Auth` | Semua scenario modul Authentication |
 | `@Dashboard` | Semua scenario modul Dashboard |
 | `@Console` | Semua scenario modul Console |
