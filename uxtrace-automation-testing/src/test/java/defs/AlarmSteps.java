@@ -29,7 +29,7 @@ public class AlarmSteps {
 
     @And("User menavigasi ke halaman Alarm Management")
     public void userMenavigasiKeHalamanAlarm() {
-        Hooks.driver.get(TestData.BASE_URL + "/alarm"); // ✅ FIX: pakai BASE_URL
+        Hooks.driver.get(TestData.BASE_URL + "/alarm");
         System.out.println("Navigasi ke halaman Alarm Management");
     }
 

@@ -14,7 +14,7 @@ public class AlarmPage extends BasePage {
     private By checkboxAlarmRows = By.cssSelector("tbody input[type='checkbox']");
 
     private By dialogConfirmDelete = By.xpath("//dialog[contains(@class, 'rounded-2xl')]");
-    private By btnCancelDelete = By.xpath("//dialog//button[contains(text(), 'Batal')]");
+//    private By btnCancelDelete = By.xpath("//dialog//button[contains(text(), 'Batal')]");
 
     private By inputAlarmName = By.id("alarm-title");
     private By inputAlarmQuery = By.id("alarm-query");
@@ -24,7 +24,7 @@ public class AlarmPage extends BasePage {
 
     private By btnKirimUjiAlert = By.xpath("//dialog//button[contains(text(), 'Kirim Uji Alert')]");
     private By btnSimpanAlarm = By.xpath("//dialog//button[contains(text(), 'Simpan')]");
-    private By btnCloseModal = By.xpath("//dialog//button[@aria-label='Close']");
+//    private By btnCloseModal = By.xpath("//dialog//button[@aria-label='Close']");
 
     // Dialog & teks hasil uji alert
     private By dialogTestResult = By.xpath("//dialog[contains(@class, 'rounded-2xl')]//p[contains(text(), 'Berhasil') or contains(text(), 'Gagal')]");
@@ -42,33 +42,6 @@ public class AlarmPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(btnCreateAlarm)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(inputAlarmName));
         System.out.println("Modal tambah alarm terbuka");
-    }
-
-    public void clickMultiDeleteButton() {
-        try {
-            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
-            Thread.sleep(500);
-
-            WebElement deleteBtn = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[contains(@class, 'bg-error-icon') and contains(text(), 'Hapus')]")
-            ));
-
-            System.out.println("Menemukan tombol bulk delete: '" + deleteBtn.getText() + "'");
-            deleteBtn.click();
-
-        } catch (Exception e) {
-            System.out.println("Tombol bulk delete tidak ditemukan: " + e.getMessage());
-            throw new RuntimeException("Tombol bulk delete tidak ditemukan setelah checklist");
-        }
-    }
-
-    public void searchAlarmByKeyword(String keyword) {
-        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(inputSearchAlarm));
-        searchBox.clear();
-        searchBox.sendKeys(keyword);
-        searchBox.sendKeys(Keys.ENTER);
-        try { Thread.sleep(1500); } catch (InterruptedException e) {}
-        System.out.println("Mencari: " + keyword);
     }
 
     public void fillAlarmFormComplete(String title, String query, String message, String interval, String telegram) {
@@ -103,12 +76,6 @@ public class AlarmPage extends BasePage {
         System.out.println("Klik Kirim Uji Alert");
     }
 
-    public void clickSimpanAlarm() {
-        wait.until(ExpectedConditions.elementToBeClickable(btnSimpanAlarm)).click();
-        try { Thread.sleep(2000); } catch (InterruptedException e) {}
-        System.out.println("Klik Simpan Alarm");
-    }
-
     public String getUjiAlertStatusText() {
         try { Thread.sleep(1000); } catch (InterruptedException e) {}
         wait.until(ExpectedConditions.visibilityOfElementLocated(dialogTestResult));
@@ -116,6 +83,39 @@ public class AlarmPage extends BasePage {
         String text = statusElement.getText();
         System.out.println("Status alert: " + text);
         return text;
+    }
+
+    public void clickMultiDeleteButton() {
+        try {
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            Thread.sleep(500);
+
+            WebElement deleteBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[contains(@class, 'bg-error-icon') and contains(text(), 'Hapus')]")
+            ));
+
+            System.out.println("Menemukan tombol bulk delete: '" + deleteBtn.getText() + "'");
+            deleteBtn.click();
+
+        } catch (Exception e) {
+            System.out.println("Tombol bulk delete tidak ditemukan: " + e.getMessage());
+            throw new RuntimeException("Tombol bulk delete tidak ditemukan setelah checklist");
+        }
+    }
+
+    public void searchAlarmByKeyword(String keyword) {
+        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(inputSearchAlarm));
+        searchBox.clear();
+        searchBox.sendKeys(keyword);
+        searchBox.sendKeys(Keys.ENTER);
+        try { Thread.sleep(1500); } catch (InterruptedException e) {}
+        System.out.println("Mencari: " + keyword);
+    }
+
+    public void clickSimpanAlarm() {
+        wait.until(ExpectedConditions.elementToBeClickable(btnSimpanAlarm)).click();
+        try { Thread.sleep(2000); } catch (InterruptedException e) {}
+        System.out.println("Klik Simpan Alarm");
     }
 
     public void clickCloseUjiAlert() {

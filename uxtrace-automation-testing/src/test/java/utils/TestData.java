@@ -13,9 +13,7 @@ public class TestData {
 
     //EDIT DATA
     public static final String ALARM_EDIT_TITLE = "Alert Click Updated";
-
     public static final String ALARM_EDIT_QUERY = "SELECT * FROM events WHERE event_name = 'kur_button_click' WHEN count > 100";
-
     public static final String ALARM_EDIT_MESSAGE = "Pesan Notifikasi Hasil Update";
     public static final String ALARM_EDIT_INTERVAL = "10";
     public static final String ALARM_EDIT_TELEGRAM = "1484397336";
